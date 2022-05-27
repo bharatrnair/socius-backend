@@ -268,9 +268,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeFeedController.cs" />
+    <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -283,6 +285,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Authenticate.cs" />
     <Compile Include="Migrations\202205110536007_InitialCreate.cs" />
     <Compile Include="Migrations\202205110536007_InitialCreate.Designer.cs">
       <DependentUpon>202205110536007_InitialCreate.cs</DependentUpon>
@@ -303,7 +306,13 @@
     <Compile Include="Migrations\202205231032143_dbchanged.Designer.cs">
       <DependentUpon>202205231032143_dbchanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205240610457_newmodels.cs" />
+    <Compile Include="Migrations\202205240610457_newmodels.Designer.cs">
+      <DependentUpon>202205240610457_newmodels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Like.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\SignInCredentials.cs" />
     <Compile Include="Models\Signup.cs" />
@@ -365,6 +374,8 @@
     <Content Include="Views\Users1\Details.cshtml" />
     <Content Include="Views\Users1\Edit.cshtml" />
     <Content Include="Views\Users1\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -415,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205231032143_dbchanged.resx">
       <DependentUpon>202205231032143_dbchanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205240610457_newmodels.resx">
+      <DependentUpon>202205240610457_newmodels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
