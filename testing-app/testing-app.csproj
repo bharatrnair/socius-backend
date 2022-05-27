@@ -286,6 +286,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Authenticate.cs" />
+    <Compile Include="Infrastructure\MvcAuthenticate.cs" />
     <Compile Include="Migrations\202205110536007_InitialCreate.cs" />
     <Compile Include="Migrations\202205110536007_InitialCreate.Designer.cs">
       <DependentUpon>202205110536007_InitialCreate.cs</DependentUpon>

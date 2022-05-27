@@ -95,7 +95,6 @@ namespace testing_app.Controllers
             {
                 return BadRequest(ModelState);
             }
-             Mapper.Initialize(cfg => cfg.CreateMap<Signup, Users>());
              Users users = Mapper.Map<Users>(Signup);
 
             users.password = BCrypt.Net.BCrypt.HashPassword(users.password);
