@@ -7,10 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using testing_app.Data;
+using testing_app.Infrastructure;
 using testing_app.Models;
 
 namespace testing_app.Controllers
 {
+        [Authenticate]
     public class Users1Controller : Controller
     {
         private testing_appContext db = new testing_appContext();

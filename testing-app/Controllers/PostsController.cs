@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using testing_app.Data;
+using testing_app.Infrastructure;
 using testing_app.Models;
 
 namespace testing_app.Controllers
