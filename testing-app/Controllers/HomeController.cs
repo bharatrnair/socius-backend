@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using testing_app.Factory;
+using testing_app.Infrastructure;
 
 namespace testing_app.Controllers
 {
@@ -18,6 +19,24 @@ namespace testing_app.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = _heading;
+
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            Session["id"] = 5;
+            return View();
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return Redirect("/Home");
+        }
+
+        public ActionResult AboutUs()
+        {
 
             return View();
         }
