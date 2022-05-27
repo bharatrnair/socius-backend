@@ -9,49 +9,48 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using testing_app.Data;
-using testing_app.Infrastructure;
 using testing_app.Models;
 
 namespace testing_app.Controllers
 {
-    public class PostsController : ApiController
+    public class LikesController : ApiController
     {
         private testing_appContext db = new testing_appContext();
 
-        // GET: api/Posts
-        public IQueryable<Post> GetPosts()
+        // GET: api/Likes
+        public IQueryable<Like> GetLikes()
         {
-            return db.Posts;
+            return db.Likes;
         }
 
-        // GET: api/Posts/5
-        [ResponseType(typeof(Post))]
-        public IHttpActionResult GetPost(int id)
+        // GET: api/Likes/5
+        [ResponseType(typeof(Like))]
+        public IHttpActionResult GetLike(int id)
         {
-            Post post = db.Posts.Find(id);
-            if (post == null)
+            Like like = db.Likes.Find(id);
+            if (like == null)
             {
                 return NotFound();
             }
 
-            return Ok(post);
+            return Ok(like);
         }
 
-        // PUT: api/Posts/5
+        // PUT: api/Likes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPost(int id, Post post)
+        public IHttpActionResult PutLike(int id, Like like)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != post.Id)
+            if (id != like.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(post).State = EntityState.Modified;
+            db.Entry(like).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +58,7 @@ namespace testing_app.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PostExists(id))
+                if (!LikeExists(id))
                 {
                     return NotFound();
                 }
@@ -72,35 +71,35 @@ namespace testing_app.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Posts
-        [ResponseType(typeof(Post))]
-        public IHttpActionResult PostPost(Post post)
+        // POST: api/Likes
+        [ResponseType(typeof(Like))]
+        public IHttpActionResult PostLike(Like like)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Posts.Add(post);
+            db.Likes.Add(like);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = post.Id }, post);
+            return CreatedAtRoute("DefaultApi", new { id = like.Id }, like);
         }
 
-        // DELETE: api/Posts/5
-        [ResponseType(typeof(Post))]
-        public IHttpActionResult DeletePost(int id)
+        // DELETE: api/Likes/5
+        [ResponseType(typeof(Like))]
+        public IHttpActionResult DeleteLike(int id)
         {
-            Post post = db.Posts.Find(id);
-            if (post == null)
+            Like like = db.Likes.Find(id);
+            if (like == null)
             {
                 return NotFound();
             }
 
-            db.Posts.Remove(post);
+            db.Likes.Remove(like);
             db.SaveChanges();
 
-            return Ok(post);
+            return Ok(like);
         }
 
         protected override void Dispose(bool disposing)
@@ -112,9 +111,9 @@ namespace testing_app.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PostExists(int id)
+        private bool LikeExists(int id)
         {
-            return db.Posts.Count(e => e.Id == id) > 0;
+            return db.Likes.Count(e => e.Id == id) > 0;
         }
     }
 }
