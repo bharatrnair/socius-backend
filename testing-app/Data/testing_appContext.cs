@@ -22,5 +22,9 @@ namespace testing_app.Data
         public System.Data.Entity.DbSet<testing_app.Models.Users> Users { get; set; }
 
         public System.Data.Entity.DbSet<testing_app.Models.Post> Posts { get; set; }
+
+        public System.Data.Entity.DbSet<testing_app.Models.Like> Likes { get; set; }
+
+        public System.Data.Entity.DbSet<testing_app.Models.Comment> Comments { get; set; }
     }
 }

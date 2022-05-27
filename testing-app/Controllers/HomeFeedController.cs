@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using testing_app.Data;
 using testing_app.Factory;
+using testing_app.Infrastructure;
 using testing_app.Models;
 
 namespace testing_app.Controllers
