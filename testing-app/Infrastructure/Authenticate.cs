@@ -1,34 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Filters;
+using System.Web.Http;
+using System.Web.Http.Filters;
 using System.Web.Routing;
 
 namespace testing_app.Infrastructure
 {
     public class Authenticate : ActionFilterAttribute, IAuthenticationFilter
     {
-        public void OnAuthentication(AuthenticationContext filterContext)
+        Task IAuthenticationFilter.AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(Convert.ToString(filterContext.HttpContext.Session["id"])))
-            {
-                filterContext.Result = new HttpUnauthorizedResult();
+            
+            var Session = HttpContext.Current.Session;
+            if (string.IsNullOrEmpty(Convert.ToString(Session["id"]))){
+                context.ErrorResult = new AuthenticationFailureResult("Unoutharized", context.Request);
             }
+            return Task.FromResult(0);
         }
-        public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+
+        Task IAuthenticationFilter.ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
         {
-            if (filterContext.Result == null || filterContext.Result is HttpUnauthorizedResult)
-            {
-                //Redirecting the user to the Login View of Account Controller  
-                filterContext.Result = new RedirectToRouteResult(
-                new RouteValueDictionary
-                {
-                     { "controller", "Home" },
-                     { "action", "Index" }
-                });
-            }
+            return Task.FromResult(0);
+        }
+
+    }
+  
+
+    public class AuthenticationFailureResult : IHttpActionResult
+    {
+        public string ReasonPhrase { get; private set; }
+
+        public HttpRequestMessage Request { get; private set; }
+        public AuthenticationFailureResult(string reasonPhrase, HttpRequestMessage request)
+        {
+            ReasonPhrase = reasonPhrase;
+            Request = request;
+        }
+
+
+        public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+        {
+            return Task.FromResult(Execute());
+        }
+
+        private HttpResponseMessage Execute()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+            response.RequestMessage = Request;
+            response.ReasonPhrase = ReasonPhrase;
+            return response;
         }
     }
+
+
 }

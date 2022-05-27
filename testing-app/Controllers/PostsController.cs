@@ -14,6 +14,7 @@ using testing_app.Models;
 
 namespace testing_app.Controllers
 {
+    [Authenticate]
     public class PostsController : ApiController
     {
         private testing_appContext db = new testing_appContext();

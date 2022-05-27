@@ -11,6 +11,7 @@ using testing_app.Models;
 
 namespace testing_app.Controllers
 {
+    [Authenticate]
     public class HomeFeedController : ApiController
     {
         private testing_appContext _db;
