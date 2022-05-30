@@ -15,20 +15,20 @@ namespace testing_app.Controllers
     [Authenticate]
     public class DpController : ApiController
     {
-        private testing_appContext _db;
+        private IAppDatabase _appDatabase;
 
         public DpController(IAppDatabase appDatabase)
         {
-            _db = appDatabase.Db;
+            _appDatabase = appDatabase;
         }
         [HttpPost]
         public IHttpActionResult Post(DpUrl dpUrl )
         {
             var Sesion = HttpContext.Current.Session;
-            Users currentUser = _db.Users.Find(Sesion["id"]);
+            Users currentUser = _appDatabase.Db.Users.Find(Sesion["id"]);
 
             currentUser.DpUrl = dpUrl.Url;
-            _db.SaveChanges();
+            _appDatabase.Db.SaveChanges();
             return Ok(currentUser);
         }
     }

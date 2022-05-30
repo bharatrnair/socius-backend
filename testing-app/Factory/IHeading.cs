@@ -11,7 +11,7 @@ namespace testing_app.Factory
         string Value { get; }
     }
 
-    class Heading : IHeading
+    class Heading : IHeadings
     {
 
         public string Value
