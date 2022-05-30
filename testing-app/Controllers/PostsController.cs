@@ -69,7 +69,7 @@ namespace testing_app.Controllers
         public IHttpActionResult DeletePost(int id)
         {
             Post post = db.Posts.Find(id);
-            if (post == null)
+            if (post == null || post.UsersId != )
             {
                 return NotFound();
             }
@@ -80,18 +80,6 @@ namespace testing_app.Controllers
             return Ok(post);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool PostExists(int id)
-        {
-            return db.Posts.Count(e => e.Id == id) > 0;
-        }
+        
     }
 }
