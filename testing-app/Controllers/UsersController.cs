@@ -18,85 +18,17 @@ namespace testing_app.Controllers
     {
         private testing_appContext db = new testing_appContext();
 
-        // GET: api/Users
-        [ResponseType(typeof(Users))]
-        [HttpGet]
-        public IHttpActionResult GetUsers()
-        {
-            var Session = System.Web.HttpContext.Current.Session;
-            if (Session["Id"] == null)
-            {
-                return NotFound();
-            }
-
-            Users user = db.Users.Find(Session["Id"]);
-            return Ok(user) ; 
-        }
-
-        
-        
-
-        [ResponseType(typeof(Users))]
-        public IHttpActionResult GetUsersByPhone(long phone)
-        {
-            IQueryable<Users> users = db.Users.Where(user => user.phone == phone);
-            if (users == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(users);
-        }
-
-        // PUT: api/Users/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutUsers(int id, Users users)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != users.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(users).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-
-
-
         // POST: api/Users
         [ResponseType(typeof(Users))]
         public IHttpActionResult PostUsers(Signup Signup)
         {
- 
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-             
-             Users users = Mapper.Map<Users>(Signup);
+
+            Users users = Mapper.Map<Users>(Signup);
 
             users.password = BCrypt.Net.BCrypt.HashPassword(users.password);
             db.Users.Add(users);
@@ -105,37 +37,5 @@ namespace testing_app.Controllers
             return CreatedAtRoute("DefaultApi", new { id = users.Id }, users);
         }
 
-        // DELETE: api/Users/5
-        [ResponseType(typeof(Users))]
-        public IHttpActionResult DeleteUsers(int id)
-        {
-            Users users = db.Users.Find(id);
-            if (users == null)
-            {
-                return NotFound();
-            }
-
-            db.Users.Remove(users);
-            db.SaveChanges();
-
-            return Ok(users);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool UsersExists(int id)
-        {
-            return db.Users.Count(e => e.Id == id) > 0;
-        }
-       
     }
-
-
 }

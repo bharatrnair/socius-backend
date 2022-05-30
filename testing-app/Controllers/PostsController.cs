@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,6 +7,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using testing_app.Data;
@@ -39,53 +41,27 @@ namespace testing_app.Controllers
         }
 
         // PUT: api/Posts/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutPost(int id, Post post)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != post.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(post).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PostExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+       
 
         // POST: api/Posts
         [ResponseType(typeof(Post))]
-        public IHttpActionResult PostPost(Post post)
+        public IHttpActionResult PostPost(PostValidation postInput)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            Post post = Mapper.Map<Post>(postInput);
+            var Session = HttpContext.Current.Session;
+
+            post.UsersId = (int)Session["id"];
+
+            post.Time = DateTime.Now;
 
             db.Posts.Add(post);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = post.Id }, post);
+            return Created("post",post);
         }
 
         // DELETE: api/Posts/5

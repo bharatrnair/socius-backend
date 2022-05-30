@@ -19,6 +19,8 @@ namespace testing_app.Models
 
         public string Email { get; set; }
 
+        public string DpUrl { get; set; }
+
         public long phone { get; set; }
 
         public string city { get; set; }

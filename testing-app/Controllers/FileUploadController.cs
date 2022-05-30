@@ -5,34 +5,34 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using testing_app.Infrastructure;
 
 namespace testing_app.Controllers
 {
+    [Authenticate]
     public class FileUploadController : ApiController
     {
-        public HttpResponseMessage Post()
+        public IHttpActionResult Post()
         {
-            HttpResponseMessage result = null;
             var httpRequest = HttpContext.Current.Request;
             if(httpRequest.Files.Count > 0)
             {
-                var docfiles = new List<string>();
+                var fileNameList = new List<string>();
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
-                    var filePath = HttpContext.Current.Server.MapPath("~/Public/" + postedFile.FileName);
+                    Random rnd = new Random();
+                    string fileName = Convert.ToString(rnd.Next()) + postedFile.FileName;
+                    var filePath = HttpContext.Current.Server.MapPath("~/Public/" + fileName);
                     postedFile.SaveAs(filePath);
-                    docfiles.Add(filePath);
+                    fileNameList.Add("/Public/" + fileName);
                 }
-                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
-                //return Ok(docfiles);
+                return Ok(fileNameList);
             }
             else
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
-               // return BadRequest();
+               return BadRequest();
             }
-            return result;
         }
     }
 }

@@ -268,17 +268,16 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\DpController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
+    <Compile Include="Controllers\GetUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeFeedController.cs" />
     <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
-    <Compile Include="Controllers\Users1Controller.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\testing_appContext.cs" />
     <Compile Include="Factory\IHeading.cs" />
     <Compile Include="Factory\AppDatabase.cs" />
@@ -311,10 +310,20 @@
     <Compile Include="Migrations\202205240610457_newmodels.Designer.cs">
       <DependentUpon>202205240610457_newmodels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205300434143_postupdated.cs" />
+    <Compile Include="Migrations\202205300434143_postupdated.Designer.cs">
+      <DependentUpon>202205300434143_postupdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205300605170_usermodelUpdated.cs" />
+    <Compile Include="Migrations\202205300605170_usermodelUpdated.Designer.cs">
+      <DependentUpon>202205300605170_usermodelUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\DpUrl.cs" />
     <Compile Include="Models\Like.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostValidation.cs" />
     <Compile Include="Models\SignInCredentials.cs" />
     <Compile Include="Models\Signup.cs" />
     <Compile Include="Models\Users.cs" />
@@ -430,6 +439,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205240610457_newmodels.resx">
       <DependentUpon>202205240610457_newmodels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205300434143_postupdated.resx">
+      <DependentUpon>202205300434143_postupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205300605170_usermodelUpdated.resx">
+      <DependentUpon>202205300605170_usermodelUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

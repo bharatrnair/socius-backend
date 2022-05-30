@@ -16,7 +16,7 @@ namespace testing_app
     {
         protected void Application_Start()
         {
-            Mapper.Initialize(cfg => { cfg.CreateMap<Signup, Users>(); });
+            Mapper.Initialize(cfg => { cfg.CreateMap<Signup, Users>(); cfg.CreateMap<PostValidation, Post>(); });
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
