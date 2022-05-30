@@ -279,13 +279,11 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\testing_appContext.cs" />
-    <Compile Include="Factory\IHeading.cs" />
     <Compile Include="Factory\AppDatabase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Authenticate.cs" />
-    <Compile Include="Infrastructure\MvcAuthenticate.cs" />
     <Compile Include="Migrations\202205110536007_InitialCreate.cs" />
     <Compile Include="Migrations\202205110536007_InitialCreate.Designer.cs">
       <DependentUpon>202205110536007_InitialCreate.cs</DependentUpon>

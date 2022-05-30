@@ -46,8 +46,6 @@ namespace testing_app.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<System.Web.IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
-                kernel.Bind<IHeading>().To<Heading>();
                 kernel.Bind<IAppDatabase>().To<AppDatabase>();
                 RegisterServices(kernel);
                 GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
