@@ -69,7 +69,8 @@ namespace testing_app.Controllers
         public IHttpActionResult DeletePost(int id)
         {
             Post post = db.Posts.Find(id);
-            if (post == null || post.UsersId != )
+            var Session = HttpContext.Current.Session;
+            if (post == null || post.UsersId != (int) Session["Id"] )
             {
                 return NotFound();
             }
